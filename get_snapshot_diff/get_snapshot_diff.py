@@ -28,7 +28,11 @@ if __name__ == "__main__":
         elif s1_entries[0]["git-sha256"] != s2_image["git-sha256"]:
             s1_image = s1_entries[0]
             print(f'#-----Repo: {s2_image["git-repository"]}, Image: {s2_image["image-name"]}-----#')
-            print(f'{s2_image["git-repository"]} changed between {s1} and {s2}.  Follow the link to compare.\n')
+            print(f'Repo named {s2_image["git-repository"]}changed between {s1} and {s2}.  Follow the link to compare.')
+            print(f'Repo Name: {s2_image["git-repository"]}')
+            print(f'Image Name: {s2_image["image-name"]}')
+
+            print("")
 
             image_details = s2_image["git-repository"].split("/")
             org = g.get_organization(image_details[0])
