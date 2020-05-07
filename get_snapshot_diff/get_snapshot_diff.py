@@ -28,7 +28,7 @@ if __name__ == "__main__":
         elif s1_entries[0]["git-sha256"] != s2_image["git-sha256"]:
             s1_image = s1_entries[0]
             print(f'#-----Repo: {s2_image["git-repository"]}, Image: {s2_image["image-name"]}-----#')
-            print(f'Snapshot 1: {s1_image["git-sha256"]}\nSnapshot 2: {s2_image["git-sha256"]}\n')
+            print(f'{s2_image["git-repository"]} changed between {s1} and {s2}.  Follow the link to compare.\n')
 
             image_details = s2_image["git-repository"].split("/")
             org = g.get_organization(image_details[0])
@@ -37,8 +37,6 @@ if __name__ == "__main__":
             s1_commit = repo.get_commit(s1_image["git-sha256"])
             s2_commit = repo.get_commit(s2_image["git-sha256"])
 
-            print(f'Snapshot 1: {s1_commit.html_url}\nSnapshot 2: {s2_commit.html_url}\n')
+            print(f'https://github.com/{image_details[0]}/{image_details[1]}/compare/{s1_image["git-sha256"]}..{s2_image["git-sha256"]}')
 
-            print(f'Compare: https://github.com/{image_details[0]}/{image_details[1]}/compare/{s1_image["git-sha256"]}..{s2_image["git-sha256"]}')
-
-            print("#---------------#\n")
+            print("#---------------#\n\n")
