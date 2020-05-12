@@ -154,4 +154,4 @@ if __name__ == "__main__":
                 print("".rjust(columns, '#'))
                 print("\n")
         else:
-            print(f'Repo named {m2_image["git-repository"]} changed between {m1_name} and {m2_name}, but it\'s in the list of our skipped repositories, so we won\'t go into specifics.\n')
+            print(f'Repo named {m2_image["git-repository"]} changed between {m1_name} and {m2_name}, but it\'s in the list of our skipped repositories, so we won\'t go into specifics.\n\n')
