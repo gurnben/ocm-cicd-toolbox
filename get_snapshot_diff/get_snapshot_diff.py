@@ -136,7 +136,8 @@ if __name__ == "__main__":
                         # for comment in pull.get_comments():
                         #     print(comment)
 
-                    print(f"\tMessage: {commit.commit.message}")
+                    print(f"\tMessage:")
+                    print(f"{commit.commit.message}")
                     print("".ljust(columns, '-'))
                     print()
                 print("".ljust(columns, "<"))
