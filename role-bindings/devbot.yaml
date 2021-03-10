@@ -1,0 +1,112 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clusterpool-creator
+rules:
+  - apiGroups:
+      - 'hive.openshift.io'
+    resources:
+      - clusterclaims
+      - clusterdeployments
+      - clusterpools
+    verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+  - apiGroups:
+      - ''
+    resources:
+      - secrets
+    verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clusterpool-creator-clusterwide
+rules:
+  - apiGroups:
+      - 'hive.openshift.io'
+    resources:
+      - clusterimagesets
+    verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+  - apiGroups:
+      - 'config.openshift.io'
+    resources:
+      - clusteroperators
+    verbs:
+      - get
+      - watch
+      - list
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: devbot
+  namespace: dev
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devbot-clusterpool-creator
+  namespace: dev
+subjects:
+  - kind: ServiceAccount
+    namespace: dev
+    name: devbot
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clusterpool-creator
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devbot-clusterpool-creator-clusterwide
+subjects:
+  - kind: ServiceAccount
+    namespace: dev
+    name: devbot
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clusterpool-creator-clusterwide
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devbot-viewer
+  namespace: dev
+subjects:
+  - kind: ServiceAccount
+    namespace: dev
+    name: devbot
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devbot-hive-cluster-pool-admin
+  namespace: dev
+subjects:
+  - kind: ServiceAccount
+    namespace: dev
+    name: devbot
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hive-cluster-pool-admin

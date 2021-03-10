@@ -106,14 +106,14 @@ if __name__ == "__main__":
                 # if we can get a path of commits, we can print each and try to link them to pull requests
                 commit_path = [m2_commit]
                 iter_commit = m2_commit.parents[0]
-                iter_max = 1000
+                iter_max = 100
                 iter_count = 0
                 while iter_commit is not None and iter_commit.sha != m1_commit.sha and iter_count < iter_max:
                     commit_path.append(iter_commit)
                     iter_commit = iter_commit.parents[0] if len(iter_commit.parents) > 0 else None
                     iter_count = iter_count + 1
                 commit_path.append(m1_commit)
-                if iter_commit is None:
+                if iter_commit is None or iter_count >= iter_max:
                     print(f"Walked the entire commit tree up from {m2_commit.sha} without finding {m1_commit.sha}, we can't report on changes.")
                 else:
                     print("".rjust(columns, ">"))

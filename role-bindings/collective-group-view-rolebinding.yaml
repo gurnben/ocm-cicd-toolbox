@@ -1,0 +1,69 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: user-group-reader
+rules:
+- apiGroups: ["user.openshift.io"] # "" indicates the core API group
+  resources: ["Group", "groups"]
+  verbs: ["get", "watch", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: user-group-viewers
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: acm-qe
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: acm-qe-admin
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: AppLifecycle
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: AppLifecycle-Admins
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: cluster-lifecycle-admin
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: cluster-lifecycle-team
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: Installer
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: installer-admin
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: policy-grc
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: policy-grc-admins
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: qe
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: Search
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: Search-Admin
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: Server Foundation
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: Server Foundation Admins
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: squad-kui
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: squad-kui-Admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: user-group-reader
