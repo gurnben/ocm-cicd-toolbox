@@ -15,4 +15,4 @@ spec:
         source: registry.redhat.io/rhacm2
       - mirrors:
         - registry.redhat.io/openshift4/ose-oauth-proxy
-        source: registry.access.redhat.com/openshfit4/ose-oauth-proxy
+        source: registry.access.redhat.com/openshift4/ose-oauth-proxy
